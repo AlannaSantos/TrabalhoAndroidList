@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lista</string>
+    <string name="add">Adicionar</string>
+    <string name="titleDialog">Item</string>
+    <string name="positive">Ok</string>
+    <string name="negative">Cancelar</string>
+    <string name="itemOk">Item Ok</string>
+    <string name="itemCancel">Item Cancel</string>
+</resources>
