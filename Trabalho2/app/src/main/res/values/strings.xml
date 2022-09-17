@@ -6,4 +6,6 @@
     <string name="negative">Cancelar</string>
     <string name="itemOk">Item Ok</string>
     <string name="itemCancel">Item Cancel</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Deletar</string>
 </resources>

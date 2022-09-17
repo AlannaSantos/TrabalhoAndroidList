@@ -2,6 +2,7 @@ package com.example.trabalho2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,15 +22,8 @@ import java.util.List;
 public class ListDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
     private EditText edit_item;
-    public String item = edit_item.getText().toString();
-
-     public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
-    }
+    private OnInteractionListener mListener;
+    private String item;
 
     @NonNull
     @Override
@@ -52,14 +46,33 @@ public class ListDialog extends DialogFragment implements DialogInterface.OnClic
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-       AdapterList adapterList = new AdapterList();
-
         if (which == DialogInterface.BUTTON_POSITIVE){
-            adapterList.adicionar(item);
+            if (mListener != null){
+                 item = edit_item.getText().toString();
+                mListener.onInteraction(item);
+            }
         }
         else if (which == DialogInterface.BUTTON_NEGATIVE){
             Toast.makeText(getActivity(), R.string.itemCancel, Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnInteractionListener){
+            mListener = (OnInteractionListener) context;
+        }else{
+            throw new RuntimeException(context.toString() + "erro");
+        }
+    }
+    public interface OnInteractionListener{
+        void onInteraction(String texto);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 }

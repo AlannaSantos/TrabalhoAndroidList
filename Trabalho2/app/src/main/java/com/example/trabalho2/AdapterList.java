@@ -1,5 +1,7 @@
 package com.example.trabalho2;
 
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +15,12 @@ import java.util.List;
 public class AdapterList extends BaseAdapter {
 
     private  Context context;
-    //private List<String> listDialogs;
-    List<String> listDialogs = new ArrayList<String>();
+    List<String> listDialogs = new ArrayList<>();
 
-    public AdapterList(Context context, List<String> listDialogs) {
+    public AdapterList(Context context) {
         this.context = context;
-        this.listDialogs = listDialogs;
     }
 
-    public AdapterList() {
-
-    }
 
     @Override
     public int getCount() {
@@ -45,14 +42,18 @@ public class AdapterList extends BaseAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_list, parent, false);
         TextView textView = (TextView) view.findViewById(R.id.text);
 
-        ListDialog listDialog = new ListDialog();
-        textView.setText(listDialog.item);
+        String list = listDialogs.get(position);
+        textView.setText(list);
 
         return view;
     }
 
-    public void adicionar(String item){
+    public void add(String item){
         listDialogs.add(item);
+        notifyDataSetChanged();
+    }
+    public void remove(String i){
+        listDialogs.remove(i);
         notifyDataSetChanged();
     }
 }
